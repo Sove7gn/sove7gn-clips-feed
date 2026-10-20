@@ -73,6 +73,7 @@ def post_next(dry=False, force=False):
     return {"status": "posted", "slug": item["slug"], "permalink": link, "left": len(todo) - 1}
 
 
-RESULT = post_next(dry=globals().get("DRY", False), force=globals().get("FORCE", False))
+# test flags are consumed once (the workbench kernel is shared and keeps globals between calls)
+RESULT = post_next(dry=globals().pop("DRY", False), force=globals().pop("FORCE", False))
 print("RESULT:", json.dumps(RESULT))
 RESULT
